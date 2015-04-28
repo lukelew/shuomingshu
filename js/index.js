@@ -10,7 +10,7 @@ $(function(){
 
 	slideBox.on('touchstart','.slide_stage',function(event){
 		event.preventDefault();
-		var myIndex = $(this).attr('id').substr(5,1);
+		myIndex = $(this).attr('id').substr(5,1);
 		var touch = event.originalEvent.touches[0];
 		startX = touch.pageX + (myIndex-1)*winW;
 		startY = touch.pageY;
@@ -19,7 +19,6 @@ $(function(){
 
 	slideBox.on('touchmove','.slide_stage',function(event){
 		event.preventDefault();
-		var myIndex = $(this).attr('id').substr(5,1);
     var touch = event.originalEvent.touches[0];
     var x = touch.pageX - startX;
     var y = touch.pageY - startY;
@@ -28,36 +27,61 @@ $(function(){
     var moveDis = touch.pageX - startX + (myIndex-1)*winW;  
     console.log(moveDis)  
     if(myIndex==1 && moveDis>0){
-        return false;
+      return false;
     }
     if(myIndex == lastStage && moveDis<0){
-        return false;
+      return false;
     }
     slideBox.css('-webkit-transform','translate3d('+ x +'px,0,0)');
 	})
 
 	slideBox.on('touchend','.slide_stage',function(event){
     event.preventDefault();
-    var myIndex = $(this).attr('id').substr(5,1);
     var touch = event.originalEvent.changedTouches[0];
     var x = touch.pageX - startX + (myIndex-1)*winW;
     var y = touch.pageY - startY;
-    $(this).removeClass('active');
+    
     slideBox.addClass('autoslide');
-    //向左滑动
+    //向左滑动,下一页
     if(myIndex!=lastStage && x<=-50){
-        slideBox.css('-webkit-transform','translate3d('+ -myIndex * winW +'px,0,0)');
-        $(this).next('.slide_stage').addClass('active');
+      slideBox.css('-webkit-transform','translate3d('+ -myIndex * winW +'px,0,0)');
+      $(this).removeClass('active');
+      $(this).next('.slide_stage').addClass('active');
     }
     //保持原页
     if(x>=-50 && x <50){
-        slideBox.css('-webkit-transform','translate3d('+ -(myIndex-1) * winW +'px,0,0)');
+      slideBox.css('-webkit-transform','translate3d('+ -(myIndex-1) * winW +'px,0,0)');
     }
-    //向右滑动
+    //向右滑动，前一页
     if(myIndex!=1 && x>=50){
-        slideBox.css('-webkit-transform','translate3d('+ -(myIndex-2) * winW +'px,0,0)');
-        $(this).prev('.slide_stage').addClass('active');
+      slideBox.css('-webkit-transform','translate3d('+ -(myIndex-2) * winW +'px,0,0)');
+      $(this).removeClass('active');
+      $(this).prev('.slide_stage').addClass('active');
     }   
+	})
+
+	$('#right_icon').on('click',function(event){
+		event.preventDefault();
+		var curStage = $('.slide_stage.active').attr('id').substr(5,1);
+		if(curStage==lastStage){
+			return false;
+		}
+		slideBox.addClass('autoslide');
+		slideBox.css('-webkit-transform','translate3d('+ -curStage * winW +'px,0,0)');
+    $('#stage'+curStage).next('.slide_stage').addClass('active');
+    $('#stage'+curStage).removeClass('active');
+	})
+
+	$('#left_icon').on('click',function(event){
+		event.preventDefault();
+		var curStage = $('.slide_stage.active').attr('id').substr(5,1);
+		if(curStage==1){
+			return false;
+		}
+		slideBox.addClass('autoslide');
+		slideBox.css('-webkit-transform','translate3d('+ -(curStage-2) * winW +'px,0,0)');
+    $('#stage'+curStage).prev('.slide_stage').addClass('active');
+    $('#stage'+curStage).removeClass('active');
 	})
 
 	function blurBg(a){
