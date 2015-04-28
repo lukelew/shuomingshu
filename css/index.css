@@ -1,0 +1,345 @@
+*{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-decoration: none;
+	color: #666;
+	font-family: "Myriad Set Pro","Lucida Grande","Helvetica Neue","Helvetica","Arial","Verdana","sans-serif";
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+html,body{
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+#slide_box{
+	position: relative;
+	width: 400%;
+	height: 100%;
+}
+.slide_stage{
+  float: left;
+  width: 25%;
+  height: 100%;
+}
+.autoslide{
+  -webkit-transition:all .3s ease;
+}
+#slide_box.blur{
+	-webkit-filter:blur(6px);
+}
+#stage1{
+  background: #fe1234;
+  background-size:cover;
+}
+#stage2{
+  background: #1234fe;
+  background-size:cover;
+}
+#stage3{
+  background: #12fe34;
+  background-size:cover;
+}
+#stage4{
+  background: #fe12fe;
+  background-size:cover;
+}
+
+
+/*--目录按钮--*/
+#menu_icon{
+	position: absolute;
+	left: 1em;
+	bottom: 1em;
+	z-index: 10;
+	width: 2.2em;
+	height: 2.2em;
+}
+#menu_icon span{
+	position: absolute;
+	left: 0;
+	top: 50%;
+	z-index: 5;
+  height: 3px;
+  width: 2.2em;
+  border-radius: 2px;
+  background: #0069AC;	  
+  -webkit-transition: .3s;
+}
+#menu_icon span:before,
+#menu_icon span:after{
+  position: absolute;
+  left: 0;
+  z-index: 5;
+	width: 100%;
+  height: 3px;
+  border-radius: 2px;	  
+  background: #0069AC;
+  content: '';
+  -webkit-transition: .3s;
+}
+#menu_icon span:before{
+	top:10px;
+	-webkit-transition: top .3s .4s ease,-webkit-transform .3s ease;
+}
+#menu_icon span:after{
+	bottom:10px;
+	-webkit-transition: bottom .3s .4s ease,-webkit-transform .3s ease;
+}
+#menu_icon.active{
+	z-index: 50;
+}
+#menu_icon.active span{
+	background: rgba(0,0,0,0);
+}
+#menu_icon.active span:before{
+	-webkit-transform-origin: 50% 50%;
+  -webkit-transition: top .3s ease,-webkit-transform .3s .4s ease;
+  top: 0;
+	-webkit-transform: rotate3d(0,0,1,-45deg);
+}
+#menu_icon.active span:after{
+	-webkit-transform-origin: 50% 50%;
+  -webkit-transition: bottom .3s ease,-webkit-transform .3s .4s ease;
+	bottom: 0;
+	-webkit-transform: rotate3d(0,0,1,45deg);
+}
+
+#left_icon{
+  position: absolute;
+  left: 50%;
+  bottom: 1em;
+  z-index: 10;
+  margin: 0 0 0 -20%;
+  width: 2.2em;
+  height: 2.2em;
+}
+#left_icon span,
+#right_icon span{
+  position: absolute;
+  left: 0;
+  top: 50%;
+  z-index: 5;
+  display: inline-block;
+  height: 3px;
+  width: 2.2em;
+  border-radius: 2px;
+  background: #0069AC;    
+  -webkit-transition: .3s;
+}
+#left_icon span:before,
+#left_icon span:after{
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 5;
+  content: '';
+  width: 50%;
+  height: 3px;
+  background: #0069ac;
+  -webkit-transform-origin:0 0;
+}
+#left_icon span:before{
+  -webkit-transform:rotate3d(0,0,1,-45deg);
+}
+#left_icon span:after{
+  -webkit-transform:rotate3d(0,0,1,45deg);
+}
+#right_icon{
+  position: absolute;
+  right: 50%;
+  bottom: 1em;
+  z-index: 10;
+  margin: 0-20% 0 0;
+  width: 2.2em;
+  height: 2.2em;
+}
+#right_icon span:before,
+#right_icon span:after{
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 5;
+  content: '';
+  width: 50%;
+  height: 3px;
+  background: #0069ac;
+  -webkit-transform-origin:100% 0;
+}
+#right_icon span:before{
+  -webkit-transform:rotate3d(0,0,1,45deg);
+}
+#right_icon span:after{
+  -webkit-transform:rotate3d(0,0,1,-45deg);
+}
+.bottom_btn.blur{
+  -webkit-filter:blur(6px);
+}
+
+
+/*--功能导航按钮--*/
+#home_icon{
+	position: absolute;
+	right: 1em;
+	bottom: 1em;
+	z-index: 10;
+	width: 2.2em;
+	height: 2.2em;
+}
+#home_icon span{
+  position: relative;
+  height: 2.2em;
+  width: 2.2em;
+}
+#home_icon:before,
+#home_icon:after{
+  position: absolute;
+  left: 8%;
+  bottom: 40%;
+  z-index: 5;
+  width: 90%;
+  height: 9%;
+  -webkit-transition: .6s;
+  background: #0069ac;
+  border-radius: 2px;
+  content: "";
+}
+#home_icon:after{
+	-webkit-transform: rotate(90deg);
+}
+#home_icon.active{
+	z-index: 50;
+}
+#home_icon.active:before{
+	-webkit-transform: rotate(225deg) translate3D(0,0,0);
+}
+#home_icon.active:after{
+	-webkit-transform: rotate(-45deg) translate3D(0,0,0);
+}
+
+/*--列表式目录--*/
+#catalogue{
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 45;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.6);
+  -webkit-transition:all .3s ease;
+}
+#catalogue.active{
+  opacity: 1;
+  visibility: visible;
+}
+#catalogue .container{
+  padding: 3em 4em;
+}
+#catalogue h2{
+  height: 10%;
+}
+#catalogue ul{
+  width: 100%;
+  height: 90%;
+  overflow-x:hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+#catalogue ul li{
+  margin: 0 0 0.4em 0;
+  height: 2.25em;
+}
+#catalogue ul li a{
+  display: block;
+  height: 2.25em;
+}
+#catalogue ul li span{
+  float: left;
+  display: inline-block;
+  height: 1.5em;
+  color: #0069ac;
+  font-size: 1.5em;
+  line-height: 1.5em;
+  padding: 0 0.5em 0 0.2em;
+}
+#catalogue ul li strong{
+  float: left;
+  display: inline-block;
+  height: 2.25em;
+  font-size: 1em;
+  line-height: 2.25em;
+}
+.ca_li{
+  -webkit-transform:translate3D(2em,1em,0);
+  opacity: 0;
+  -webkit-transition:all .6s ease-out;
+}
+#catalogue.active .ca_li{
+  opacity: 1;
+}
+#catalogue.active .ca_li{
+  -webkit-transform:translate3D(0,0,0);
+  -webkit-transition:all .6s ease-out;
+}
+
+/*--功能导航--*/
+#nav_btns{
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.6);
+  -webkit-transition:all .5s ease;
+}
+#nav_btns.active{
+  visibility: visible;
+  opacity: 1;
+  z-index: 45;
+}
+#nav_btns ul{
+  width: 100%;
+  height: 100%;
+}
+#nav_btns li{
+  position: absolute;
+  right: 1em;
+  bottom: 1em;
+  z-index: 10;
+  width: 2.2em;
+  height: 2.2em;
+  text-align: center;
+  line-height: 2.2em;
+  background: #fff;
+  border-radius: 50%;
+  -webkit-transition:all .3s ease;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+#nav_btns.active li:nth-child(1){
+  -webkit-transform:translate3D(-7em,0.8em,0) rotate(720deg);
+}
+#nav_btns.active li:nth-child(2){
+  -webkit-transform:translate3D(-5.8em,-1.8em,0) rotate(720deg);
+}
+#nav_btns.active li:nth-child(3){
+  -webkit-transform:translate3D(-4.1em,-4.1em,0) rotate(720deg);
+}
+#nav_btns.active li:nth-child(4){
+  -webkit-transform:translate3D(-1.8em,-5.8em,0) rotate(720deg);
+}
+#nav_btns.active li:nth-child(5){
+  -webkit-transform:translate3D(0.8em,-7em,0) rotate(720deg);
+}
+#nav_btns a{
+  line-height: 2.2em;
+}
+#nav_btns a:before{
+  font-size:1.4em;
+  color: #0069AC;
+}
