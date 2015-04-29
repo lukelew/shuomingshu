@@ -5,8 +5,13 @@ $(function(){
       startY,
       lastStage = $('.slide_stage').length,
       slideBox = $('#slide_box');
+      cata = $('#catalogue');
 
-	$('#catalogue').find('.container').css({'height':winH - 96,'width':winW - 128});
+  //初始化布局
+  slideBox.css('width',lastStage*100+'%');
+  $('.slide_stage').css('width',(1/lastStage)*100+'%');
+	cata.find('.container').css({'height':winH - 96,'width':winW - 128});
+
 
 	slideBox.on('touchstart','.slide_stage',function(event){
 		event.preventDefault();
@@ -25,7 +30,6 @@ $(function(){
 
     //判断滑动方向
     var moveDis = touch.pageX - startX + (myIndex-1)*winW;  
-    console.log(moveDis)  
     if(myIndex==1 && moveDis>0){
       return false;
     }
@@ -87,31 +91,41 @@ $(function(){
 	function blurBg(a){
 		if($(a).hasClass('active')){
 			$(a).removeClass('active');
-			$('#box').removeClass('blur');
+			$('#slide_box').removeClass('blur');
 			$('.bottom_btn').removeClass('blur');
 		}
 		else{
 			$(a).addClass('active');
-			$('#box').addClass('blur');
+			$('#slide_box').addClass('blur');
 			$('.bottom_btn').not(a).addClass('blur');
 		}
 	}
 	$('#menu_icon').on('click',function(){	
 		if($(this).hasClass('active')){
-			$('#catalogue').removeClass('active');
+			cata.removeClass('active');
 		}
 		else{
-			$('#catalogue').addClass('active');
+			cata.addClass('active');
 		}
 		blurBg(this);
 	})
 
-	$('#catalogue').find('li').each(function(i){
+	cata.find('li').each(function(i){
 		$(this).css('-webkit-transition-delay','.'+i+'s');
 		if(i>=5){
 			$(this).css('-webkit-transition-delay','.5s');	
 		}
 	})
+  cata.on('click','a',function(){
+    var cataIndex = $('.ca_li').find('a').index(this)+1;
+    cata.removeClass('active');
+    $('#menu_icon').removeClass('active');
+    $('#slide_box').removeClass('blur');
+    $('.bottom_btn').removeClass('blur');
+    slideBox.css('-webkit-transform','translate3d('+ -(cataIndex-1) * winW +'px,0,0)');
+    $('.slide_stage').removeClass('active');
+    $('#stage'+cataIndex).addClass('active');
+  })
 
 
 

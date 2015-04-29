@@ -15,12 +15,10 @@ html,body{
 }
 #slide_box{
 	position: relative;
-	width: 400%;
 	height: 100%;
 }
 .slide_stage{
   float: left;
-  width: 25%;
   height: 100%;
 }
 .autoslide{
@@ -43,6 +41,10 @@ html,body{
 }
 #stage4{
   background: #fe12fe;
+  background-size:cover;
+}
+#stage5{
+  background: #eeaa33;
   background-size:cover;
 }
 
