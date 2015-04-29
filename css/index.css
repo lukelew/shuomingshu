@@ -28,7 +28,7 @@ html,body{
 	-webkit-filter:blur(6px);
 }
 #stage1{
-  background: #fe1234;
+  background: url(../images/bg.jpg);
   background-size:cover;
 }
 #stage2{

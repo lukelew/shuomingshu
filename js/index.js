@@ -120,7 +120,7 @@ $(function(){
     var cataIndex = $('.ca_li').find('a').index(this)+1;
     cata.removeClass('active');
     $('#menu_icon').removeClass('active');
-    $('#slide_box').removeClass('blur');
+    slideBox.removeClass('blur autoslide');
     $('.bottom_btn').removeClass('blur');
     slideBox.css('-webkit-transform','translate3d('+ -(cataIndex-1) * winW +'px,0,0)');
     $('.slide_stage').removeClass('active');
